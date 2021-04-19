@@ -50,6 +50,12 @@ class Circle(CrideModel):
         help_text='Number of members',
     )
 
+    members = models.ManyToManyField(
+        'users.User',
+        through='circles.Membership',
+        through_fields=('circle', 'user')
+    )
+
     def __str__(self):
         return self.name
 

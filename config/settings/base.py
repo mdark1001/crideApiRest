@@ -30,7 +30,7 @@ ROOT_URLCONF = 'config.urls'
 # WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
-#Users model
+# Users model
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -45,7 +45,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+
 ]
 LOCAL_APPS = [
     'cride.users.apps.UsersConfig',
@@ -158,3 +160,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERYD_TASK_TIME_LIMIT = 5 * 60
 CELERYD_TASK_SOFT_TIME_LIMIT = 60
 
+# Django rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        #   'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}

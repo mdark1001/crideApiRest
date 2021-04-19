@@ -9,6 +9,11 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from cride.utils.models import CrideModel
 
+phone_regex = RegexValidator(
+    regex=r'\+?1?\d{9,15}$',
+    message='Phone number has not format required'
+)
+
 
 class User(CrideModel, AbstractUser):
     """
@@ -21,10 +26,7 @@ class User(CrideModel, AbstractUser):
             'unique': 'A user with that email already exists.'
         }
     )
-    phone_regex = RegexValidator(
-        regex=r'\+?1?\d{9,15}$',
-        message='Phone number has not format required'
-    )
+
     phone_number = models.CharField(
         validators=[phone_regex],
         max_length=17,
@@ -38,7 +40,7 @@ class User(CrideModel, AbstractUser):
         default=True,
         help_text=""""""
     )
-    is_verifed = models.BooleanField(
+    is_verified = models.BooleanField(
         'User verified',
         default=False,
     )
@@ -48,4 +50,3 @@ class User(CrideModel, AbstractUser):
 
     def get_short_name(self):
         return self.username
-
